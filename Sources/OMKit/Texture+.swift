@@ -121,3 +121,25 @@ public extension ASCollectionNode {
             
     }
 }
+
+
+import SwiftUI
+struct ASDKView<N: ASDisplayNode, T: ASDKViewController<N>>: View {
+    let controller: T
+    
+    var body: some View {
+        ASDKViewControllerRepresentable(controller: controller)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+
+struct ASDKViewControllerRepresentable<N: ASDisplayNode, T: ASDKViewController<N>>: UIViewControllerRepresentable {
+    let controller: T
+    func makeUIViewController(context: Context) -> some UIViewController {
+        controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
+
