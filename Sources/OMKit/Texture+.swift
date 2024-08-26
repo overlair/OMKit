@@ -153,7 +153,7 @@ struct ASDKViewControllerRepresentable<N: ASDisplayNode, T: ASDKViewController<N
 import UIKit
 
 public class LeftAlignedFlowLayout: UICollectionViewFlowLayout{
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var newAttributesArray = [UICollectionViewLayoutAttributes]()
         guard let superAttributesArray = super.layoutAttributesForElements(in: rect) else { return nil }
         for (index, attributes) in superAttributesArray.enumerated() {
