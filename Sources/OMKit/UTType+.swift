@@ -10,6 +10,8 @@ import Foundation
 
 import UniformTypeIdentifiers
 @available(macOS 11.0, *)
+@available(iOS 14.0, *)
+
 extension UTType {
     static let allTypes: [UTType] =
     [.item,
