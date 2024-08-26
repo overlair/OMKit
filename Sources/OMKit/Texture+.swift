@@ -150,7 +150,7 @@ public struct ASDKViewControllerRepresentable<T: ASDisplayNode>: UIViewControlle
         controller
     }
     
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 }
 
 
