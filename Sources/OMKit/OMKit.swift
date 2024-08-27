@@ -36,9 +36,14 @@ public final class SeparatorFlowLayout: UICollectionViewFlowLayout {
 }
 
 public final class SeparatorView: UICollectionReusableView {
+    public init(frame: CGRect, color: UIColor = .systemGray6) {
+        super.init(frame: frame)
+        self.backgroundColor = color
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray6
+        self.backgroundColor = .systemGray5
     }
 
     required init?(coder aDecoder: NSCoder) {
