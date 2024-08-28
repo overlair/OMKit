@@ -85,7 +85,7 @@ public enum OMFooter {
     public static let bPadding = CGFloat(8)
 }
 public enum OMButton {
-    public static let size = CGFloat(26)
+    public static let size = CGFloat(28)
     public static let radius = CGFloat(12)
 }
 
