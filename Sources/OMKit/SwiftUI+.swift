@@ -205,14 +205,13 @@ public struct ButtonBackground: ViewModifier {
             .background {
                 if let shadow = shadowTint {
                     Rectangle()
-                        .fill(tint ?? .clear)
-                        .opacity(opacity)
+                        .fill((tint ?? .clear).opacity(opacity))
+                        
                         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
                         .shadow(color: shadow, radius: shadowRadius, offset: shadowOffset)
                 } else {
                     Rectangle()
-                        .fill(tint ?? .clear)
-                        .opacity(opacity)
+                        .fill((tint ?? .clear).opacity(opacity))
                         .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
 
                 }
