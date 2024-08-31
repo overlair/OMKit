@@ -14,6 +14,9 @@ import AppKit
 @available(iOS 13.0, *)
 @available(macOS 10.15, *)
 extension Color {
+    static let darkPink = Color(red: 255 / 255, green: 105 / 255, blue: 180 / 255)
+    static let darkPurple = Color(red: 138 / 255, green: 43 / 255, blue: 226 / 255)
+
 #if os(iOS)
     static let background = Color(UIColor.systemBackground)
     static let gray1 = Color(UIColor.systemGray)
@@ -22,6 +25,8 @@ extension Color {
     static let gray4 = Color(UIColor.systemGray4)
     static let gray5 = Color(UIColor.systemGray5)
     static let gray6 = Color(UIColor.systemGray6)
+
+
 #endif
 #if os(macOS)
     static let background = Color(NSColor.windowBackgroundColor)
