@@ -160,8 +160,8 @@ public struct ButtonBackground: ViewModifier {
     var opacity: CGFloat = 0.08
     var radius: CGFloat = 12
     var tint: Color? = .blue
-    var shadowTint: Color? = nil,
-    var shadowRadius: CGFloat  = 8,
+    var shadowTint: Color? = nil
+    var shadowRadius: CGFloat  = 8
     var shadowOffset: CGSize = .init(width: 0, height: 4)
 
 
