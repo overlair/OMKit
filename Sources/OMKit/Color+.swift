@@ -13,7 +13,7 @@ import AppKit
 
 @available(iOS 13.0, *)
 @available(macOS 10.15, *)
-extension Color {
+public extension Color {
     static let darkPink = Color(red: 255 / 255, green: 105 / 255, blue: 180 / 255)
     static let darkPurple = Color(red: 138 / 255, green: 43 / 255, blue: 226 / 255)
 
