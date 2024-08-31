@@ -203,7 +203,7 @@ public struct ButtonBackground: ViewModifier {
             .padding(.vertical, vPadding)
             .padding(.horizontal, hPadding)
             .background {
-                if let shadow = shadowColor {
+                if let shadow = shadowTint {
                     Rectangle()
                         .fill(tint ?? .clear)
                         .opacity(opacity)
