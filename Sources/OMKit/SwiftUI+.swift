@@ -114,6 +114,18 @@ public struct BarBackground: ViewModifier {
     }
 }
 
+
+public extension View {
+    func shadow(
+        color: Color = OMShadow.primaryColor,
+        radius: CGFloat  = 8,
+        offset: CGSize = .init(width: 0, height: 4)
+    ) -> some View {
+        self.shadow(color: color, radius: radius, x: offset.width, y: offset.height)
+    }
+}
+
+
 public extension View {
     func button(
         size: CGFloat = OMButton.size,
@@ -121,13 +133,22 @@ public extension View {
         vPadding: CGFloat = 10,
         opacity: CGFloat = 0.08,
         radius: CGFloat = OMButton.radius,
-        tint: Color? = nil) -> some View {
+        tint: Color? = nil,
+        shadowTint: Color? = nil,
+        shadowRadius: CGFloat  = 8,
+        shadowOffset: CGSize = .init(width: 0, height: 4)
+    
+    ) -> some View {
             self.modifier(ButtonBackground(size: size,
                                            hPadding: hPadding,
                                            vPadding: vPadding,
                                            opacity: opacity,
                                            radius: radius,
-                                           tint: tint))
+                                           tint: tint,
+                                           shadowTint: shadowTint,
+                                           shadowRadius: shadowRadius,
+                                           shadowOffset: shadowOffset
+                                          ))
     }
 }
 
@@ -139,19 +160,29 @@ public struct ButtonBackground: ViewModifier {
     var opacity: CGFloat = 0.08
     var radius: CGFloat = 12
     var tint: Color? = .blue
+    var shadowTint: Color? = nil,
+    var shadowRadius: CGFloat  = 8,
+    var shadowOffset: CGSize = .init(width: 0, height: 4)
+
 
     public init(size: CGFloat = 20,
                 hPadding: CGFloat = 8,
                 vPadding: CGFloat = 8,
                 opacity: CGFloat = 0.08,
                 radius: CGFloat = 12,
-                tint: Color? = .blue) {
+                tint: Color? = .blue,
+                shadowTint: Color? = nil,
+                shadowRadius: CGFloat  = 8,
+                shadowOffset: CGSize = .init(width: 0, height: 4)) {
         self.size = size
         self.hPadding = hPadding
         self.vPadding = vPadding
         self.opacity = opacity
         self.radius = radius
         self.tint = tint
+        self.shadowTint = shadowTint
+        self.shadowRadius = shadowRadius
+        self.shadowOffset = shadowOffset
     }
 
     public func body(content: Content) -> some View {
@@ -172,10 +203,19 @@ public struct ButtonBackground: ViewModifier {
             .padding(.vertical, vPadding)
             .padding(.horizontal, hPadding)
             .background {
-                Rectangle()
-                    .fill(tint ?? .clear)
-                    .opacity(opacity)
-                    .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+                if let shadow = shadowColor {
+                    Rectangle()
+                        .fill(tint ?? .clear)
+                        .opacity(opacity)
+                        .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+                        .shadow(color: shadow, radius: shadowRadius, offset: shadowOffset)
+                } else {
+                    Rectangle()
+                        .fill(tint ?? .clear)
+                        .opacity(opacity)
+                        .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+
+                }
             }
             .tint(tint)
             .frame(minWidth: 40, minHeight: 36)
