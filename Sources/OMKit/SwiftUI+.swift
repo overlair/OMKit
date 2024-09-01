@@ -217,7 +217,7 @@ public struct ButtonBackground: ViewModifier {
                 }
             }
             .tint(tint)
-            .frame(minWidth: 40, minHeight: 36)
+//            .frame(minWidth: 40, minHeight: 36)
             .contentShape(Rectangle())
     }
 }
