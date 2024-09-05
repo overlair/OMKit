@@ -235,7 +235,7 @@ public struct CircleButtonView<S: ShapeStyle>: View {
     var size: CGFloat = OMButton.size
     var weight: Font.Weight = .heavy
     var padding: CGFloat = 16
-    var foregroundStyle: Color = OMBackground.systemColor
+    var foregroundStyle: Color = .blue
     var fill: S?
     
     var _size: CGFloat {
@@ -255,7 +255,7 @@ public struct CircleButtonView<S: ShapeStyle>: View {
          size: CGFloat = OMButton.size,
          weight: Font.Weight = .heavy,
          padding: CGFloat = 16,
-         foregroundStyle: Color = OMBackground.systemColor,
+                foregroundStyle: Color = .blue,
             fill: S? = Material.thick,
          action: @escaping () -> Void) {
         self.icon = icon
