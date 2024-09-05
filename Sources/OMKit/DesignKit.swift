@@ -137,7 +137,9 @@ public struct TextFieldView: View {
                 .focused($__isFocused)
                 
             ButtonView(icon: "xmark.circle.fill", 
-                       opacity: isFocused ? 1 : 0,
+                       hPadding: 0,
+                       vPadding: 0,
+                       tint: isFocused ? .blue : .clear,
                        action: cancel)
         }
         .padding(.horizontal, 8)
