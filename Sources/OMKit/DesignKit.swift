@@ -103,6 +103,7 @@ public enum OMIcon {
 
 public struct TextFieldView: View {
     let text: Value<String>
+    let updateText = Message<String>()
     @Binding var isFocused: Bool
     var placeholder: String = "Search..."
 
@@ -123,18 +124,39 @@ public struct TextFieldView: View {
     }
     
     public var body: some View {
-            HStack(spacing: 2) {
+        HStack(spacing: 2) {
+            Button(action: { __isFocused = true}) {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(OMSubtitle.secondaryColor)
                     .font(Font.system(size: OMSubtitle.size, weight: .semibold))
-                OMTextField(text: text, placeholder: placeholder, size: OMTitle.size)
-                    .focused($__isFocused)
-                    .onChange(of: __isFocused, perform: changeFocused)
             }
+            OMTextField(text: text,
+                        placeholder: placeholder,
+                        size: OMTitle.size,
+                        write: updateText)
+                .focused($__isFocused)
+                
+            ButtonView(icon: "xmark.circle.fill", 
+                       opacity: isFocused ? 1 : 0,
+                       action: cancel)
+        }
         .padding(.horizontal, 8)
         .padding(.vertical, 8)
         .background(OMBackground.primaryColor)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 12, 
+                                    style: .continuous))
+        .onChange(of: __isFocused, 
+                  perform: changeFocused)
+
+    }
+    
+    
+    func cancel() {
+        if isFocused {
+            updateText.send("")
+        } else {
+            __isFocused = true
+        }
     }
 }
 

@@ -572,14 +572,18 @@ public struct OMTextField: View {
     public var placeholder: String = ""
     public var size: CGFloat = 16
     let height: CGFloat
+    let write: Message<String>
+
     @State var internalText: String
     
     public init(text: CurrentValueSubject<String, Never>,
                 placeholder: String = "",
-                size: CGFloat = 16) {
+                size: CGFloat = 16,
+                write: Message<String> = .init()) {
         self.text = text
         self.placeholder = placeholder
         self.size = size
+        self.write = write
         self._internalText = State(initialValue: text.value)
         self.height = UIFont.systemFont(ofSize: size).lineHeight
     }
@@ -588,7 +592,11 @@ public struct OMTextField: View {
             .font(Font.system(size: size))
             .frame(height: height)
             .onChange(of: internalText, perform: onTextChange)
-        
+            .onReceive(write, perform: { text in
+                DispatchQueue.main.async {
+                    internalText = text
+                }
+            })
 //        GeometryReader { geo in
 //            TextFieldRepresentable(text: text, width: geo.size.width, size: size, placeholder: placeholder)
 ////                .frame(width: geo.size.width)
