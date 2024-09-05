@@ -97,3 +97,121 @@ public enum OMIcon {
 
 
 
+
+
+
+
+struct TextFieldView: View {
+    let text: Value<String>
+    @Binding var isFocused: Bool
+    var placeholder: String = "Search..."
+
+    @FocusState var __isFocused: Bool
+    
+    func changeFocused(_ isFocused: Bool) {
+        DispatchQueue.main.async {
+            self.isFocused = isFocused
+        }
+    }
+    var body: some View {
+            HStack(spacing: 2) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(OMSubtitle.secondaryColor)
+                    .font(Font.system(size: OMSubtitle.size, weight: .semibold))
+                OMTextField(text: text, placeholder: placeholder, size: OMTitle.size)
+                    .focused($__isFocused)
+                    .onChange(of: __isFocused, perform: changeFocused)
+            }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 8)
+        .background(OMBackground.primaryColor)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+}
+
+
+struct ButtonView: View {
+    let icon: String
+    
+    var size: CGFloat = OMButton.size
+    var weight: Font.Weight = .semibold
+    var hPadding: CGFloat = 8
+    var vPadding: CGFloat = 8
+    var tint: Color? = .blue
+    var opacity: CGFloat = 0
+    
+    var disabled: Bool = false
+    let action: () -> ()
+
+    var body: some View {
+        Button(action: action) {
+                Image(systemName:  icon)
+                .font(Font.system(size: size, weight: weight))
+                .button(size: size,
+                        hPadding: hPadding,
+                        vPadding: vPadding,
+                        opacity: opacity,
+                        tint: tint)
+        }
+        .opacity(disabled ? 0.4 : 1)
+        .disabled(disabled)
+    }
+}
+
+struct MenuView: View {
+    let icon: String
+    
+    var size: CGFloat = OMButton.size
+    var weight: Font.Weight = .semibold
+    var hPadding: CGFloat = 8
+    var vPadding: CGFloat = 8
+    var tint: Color? = .blue
+    var opacity: CGFloat = 0
+    
+    let menu: UIMenu
+
+    var body: some View {
+        Image(systemName:  icon)
+        .font(Font.system(size: size, weight: weight))
+        .button(size: size,
+                hPadding: hPadding,
+                vPadding: vPadding,
+                opacity: opacity,
+                tint: tint)
+        .menu(menu: menu)
+    }
+}
+
+
+struct CircleButtonView: View {
+    let icon: String
+    var size: CGFloat = OMButton.size
+    var weight: Font.Weight = .heavy
+    var padding: CGFloat = 16
+    var foregroundStyle: Color = OMBackground.systemColor
+    var tint: Color = .blue
+    
+    var _size: CGFloat {
+        UIFont.systemFont(ofSize: size).lineHeight
+    }
+    let action: () -> ()
+
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: icon)
+                .foregroundStyle(foregroundStyle)
+                .font(Font.system(size: _size, weight: weight))
+                .frame(width: _size, height: _size)
+                .padding(padding)
+                .background {
+                    Circle()
+                        .fill(tint)
+                        .shadow(color: tint.opacity(0.3),
+                                radius: 5,
+                                y: 3)
+                }
+        }
+    }
+}
+
