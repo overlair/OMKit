@@ -284,7 +284,7 @@ public struct CircleButtonView<S: ShapeStyle>: View {
                                 
                         }else {
                             Circle()
-                                .fill(.thickMaterial)
+                                .fill(OMBackground.primaryColor)
                             
                         }
                     }
