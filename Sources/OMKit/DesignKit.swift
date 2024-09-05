@@ -230,16 +230,24 @@ public struct MenuView: View {
 }
 
 
-public struct CircleButtonView: View {
+public struct CircleButtonView<S: ShapeStyle>: View {
     let icon: String
     var size: CGFloat = OMButton.size
     var weight: Font.Weight = .heavy
     var padding: CGFloat = 16
     var foregroundStyle: Color = OMBackground.systemColor
-    var tint: Color = .blue
+    var fill: S?
     
     var _size: CGFloat {
         UIFont.systemFont(ofSize: size).lineHeight
+    }
+        
+    var shadow: Color {
+        if let fill = fill as? Color {
+            return fill.opacity(0.4)
+        }
+        
+        return OMShadow.primaryColor.opacity(0.4)
     }
     let action: () -> ()
 
@@ -248,16 +256,17 @@ public struct CircleButtonView: View {
          weight: Font.Weight = .heavy,
          padding: CGFloat = 16,
          foregroundStyle: Color = OMBackground.systemColor,
-         tint: Color = .blue,
+            fill: S? = Material.thick,
          action: @escaping () -> Void) {
         self.icon = icon
         self.size = size
         self.weight = weight
         self.padding = padding
         self.foregroundStyle = foregroundStyle
-        self.tint = tint
+        self.fill = fill
         self.action = action
     }
+    
     
     public var body: some View {
         Button(action: action) {
@@ -267,11 +276,22 @@ public struct CircleButtonView: View {
                 .frame(width: _size, height: _size)
                 .padding(padding)
                 .background {
-                    Circle()
-                        .fill(tint)
-                        .shadow(color: tint.opacity(0.3),
-                                radius: 5,
-                                y: 3)
+                    
+                    Group {
+                        if let fill {
+                            Circle()
+                                .fill(fill)
+                                
+                        }else {
+                            Circle()
+                                .fill(.thickMaterial)
+                            
+                        }
+                    }
+                    .shadow(color: shadow.opacity(0.3),
+                            radius: 5,
+                            y: 3)
+                    
                 }
         }
     }
