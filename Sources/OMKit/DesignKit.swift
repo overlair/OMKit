@@ -101,11 +101,19 @@ public enum OMIcon {
 
 
 
-struct TextFieldView: View {
+public struct TextFieldView: View {
     let text: Value<String>
     @Binding var isFocused: Bool
     var placeholder: String = "Search..."
 
+    
+    public init(text: Value<String>, isFocused: Binding<Bool>, placeholder: String = "Search...") {
+        self.text = text
+        self._isFocused = isFocused
+        self.placeholder = placeholder
+        self.__isFocused = __isFocused
+    }
+    
     @FocusState var __isFocused: Bool
     
     func changeFocused(_ isFocused: Bool) {
@@ -113,7 +121,8 @@ struct TextFieldView: View {
             self.isFocused = isFocused
         }
     }
-    var body: some View {
+    
+    public var body: some View {
             HStack(spacing: 2) {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(OMSubtitle.secondaryColor)
@@ -130,7 +139,7 @@ struct TextFieldView: View {
 }
 
 
-struct ButtonView: View {
+public struct ButtonView: View {
     let icon: String
     
     var size: CGFloat = OMButton.size
@@ -143,7 +152,29 @@ struct ButtonView: View {
     var disabled: Bool = false
     let action: () -> ()
 
-    var body: some View {
+    public init(icon: String,
+         size: CGFloat = OMButton.size,
+                weight: Font.Weight = .semibold,
+         hPadding: CGFloat = 8,
+         vPadding: CGFloat = 8,
+                tint: Color? = .blue,
+         opacity: CGFloat = 0,
+         disabled: Bool = false,
+         action: @escaping () -> Void) {
+        self.icon = icon
+        self.size = size
+        self.weight = weight
+        self.hPadding = hPadding
+        self.vPadding = vPadding
+        self.tint = tint
+        self.opacity = opacity
+        self.disabled = disabled
+        self.action = action
+    }
+    
+    
+    
+    public var body: some View {
         Button(action: action) {
                 Image(systemName:  icon)
                 .font(Font.system(size: size, weight: weight))
@@ -158,7 +189,7 @@ struct ButtonView: View {
     }
 }
 
-struct MenuView: View {
+public struct MenuView: View {
     let icon: String
     
     var size: CGFloat = OMButton.size
@@ -170,7 +201,23 @@ struct MenuView: View {
     
     let menu: UIMenu
 
-    var body: some View {
+    public init(icon: String,
+         size: CGFloat = OMButton.size,
+         weight: Font.Weight = .semibold,
+         hPadding: CGFloat = 8,
+         vPadding: CGFloat = 8,
+         tint: Color = .blue,
+        menu: UIMenu) {
+        self.icon = icon
+        self.size = size
+        self.weight = weight
+        self.vPadding = vPadding
+        self.hPadding = hPadding
+        self.tint = tint
+        self.menu = menu
+    }
+   
+    public  var body: some View {
         Image(systemName:  icon)
         .font(Font.system(size: size, weight: weight))
         .button(size: size,
@@ -183,7 +230,7 @@ struct MenuView: View {
 }
 
 
-struct CircleButtonView: View {
+public struct CircleButtonView: View {
     let icon: String
     var size: CGFloat = OMButton.size
     var weight: Font.Weight = .heavy
@@ -196,8 +243,23 @@ struct CircleButtonView: View {
     }
     let action: () -> ()
 
-
-    var body: some View {
+    public init(icon: String,
+         size: CGFloat = OMButton.size,
+         weight: Font.Weight = .heavy,
+         padding: CGFloat = 16,
+         foregroundStyle: Color = OMBackground.systemColor,
+         tint: Color = .blue,
+         action: @escaping () -> Void) {
+        self.icon = icon
+        self.size = size
+        self.weight = weight
+        self.padding = padding
+        self.foregroundStyle = foregroundStyle
+        self.tint = tint
+        self.action = action
+    }
+    
+    public var body: some View {
         Button(action: action) {
             Image(systemName: icon)
                 .foregroundStyle(foregroundStyle)
