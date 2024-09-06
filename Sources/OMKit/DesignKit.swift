@@ -110,11 +110,13 @@ public struct TextFieldView: View {
     var hPadding: CGFloat = 8
     var vPadding: CGFloat = 8
     var radius: CGFloat = 12
+    var opacity: CGFloat = 0.12
     
     public init(text: Value<String>, 
                 isFocused: Binding<Bool>,
                 placeholder: String = "Search...",
                 background: Color = OMBackground.primaryColor,
+                opacity: CGFloat = 0.12,
                 hPadding: CGFloat = 8,
                 vPadding: CGFloat = 8,
                 radius: CGFloat = 12
@@ -127,6 +129,7 @@ public struct TextFieldView: View {
         self.hPadding = hPadding
         self.vPadding = vPadding
         self.radius = radius
+        self.opacity = opacity
     }
     
     @FocusState var __isFocused: Bool
@@ -141,13 +144,14 @@ public struct TextFieldView: View {
         HStack(spacing: 2) {
             Button(action: { __isFocused = true}) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(OMSubtitle.secondaryColor)
+                    .foregroundStyle(background.opacity(0.5))
                     .font(Font.system(size: OMSubtitle.size, weight: .semibold))
             }
             OMTextField(text: text,
                         placeholder: placeholder,
                         size: OMTitle.size,
                         write: updateText)
+                .foregroundStyle(background)
                 .focused($__isFocused)
                 
             ButtonView(icon: "xmark.circle.fill", 
@@ -158,7 +162,7 @@ public struct TextFieldView: View {
         }
         .padding(.horizontal, hPadding)
         .padding(.vertical, vPadding)
-        .background(background)
+        .background(background.opacity(opacity))
         .clipShape(RoundedRectangle(cornerRadius: radius,
                                     style: .continuous))
         .onChange(of: __isFocused, 
