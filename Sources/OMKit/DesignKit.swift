@@ -106,13 +106,27 @@ public struct TextFieldView: View {
     let updateText = Message<String>()
     @Binding var isFocused: Bool
     var placeholder: String = "Search..."
-
+    var background: Color = OMBackground.primaryColor
+    var hPadding: CGFloat = 8
+    var vPadding: CGFloat = 8
+    var radius: CGFloat = 12
     
-    public init(text: Value<String>, isFocused: Binding<Bool>, placeholder: String = "Search...") {
+    public init(text: Value<String>, 
+                isFocused: Binding<Bool>,
+                placeholder: String = "Search...",
+                background: Color = OMBackground.primaryColor,
+                hPadding: CGFloat = 8,
+                vPadding: CGFloat = 8,
+                radius: CGFloat = 12
+    ) {
         self.text = text
         self._isFocused = isFocused
         self.placeholder = placeholder
         self.__isFocused = __isFocused
+        self.background = background
+        self.hPadding = hPadding
+        self.vPadding = vPadding
+        self.radius = radius
     }
     
     @FocusState var __isFocused: Bool
@@ -142,10 +156,10 @@ public struct TextFieldView: View {
                        tint: isFocused ? .blue : .clear,
                        action: cancel)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 8)
-        .background(OMBackground.primaryColor)
-        .clipShape(RoundedRectangle(cornerRadius: 12, 
+        .padding(.horizontal, hPadding)
+        .padding(.vertical, vPadding)
+        .background(background)
+        .clipShape(RoundedRectangle(cornerRadius: radius,
                                     style: .continuous))
         .onChange(of: __isFocused, 
                   perform: changeFocused)
@@ -156,6 +170,7 @@ public struct TextFieldView: View {
     func cancel() {
         if isFocused {
             updateText.send("")
+            __isFocused = false
         } else {
             __isFocused = true
         }
