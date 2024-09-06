@@ -107,24 +107,30 @@ public struct TextFieldView: View {
     @Binding var isFocused: Bool
     var placeholder: String = "Search..."
     var background: Color = OMBackground.primaryColor
+    var tint: Color? = nil
+    var foreground: Color? = nil
     var hPadding: CGFloat = 8
-    var vPadding: CGFloat = 8
+    var vPadding: CGFloat = 4
     var radius: CGFloat = 12
     var opacity: CGFloat = 0.12
     
     public init(text: Value<String>, 
                 isFocused: Binding<Bool>,
                 placeholder: String = "Search...",
-                background: Color = OMBackground.primaryColor,
+                tint: Color? = nil,
+                foreground: Color? = nil,
+                background: Color = .gray2,
                 opacity: CGFloat = 0.12,
                 hPadding: CGFloat = 8,
-                vPadding: CGFloat = 8,
+                vPadding: CGFloat = 4,
                 radius: CGFloat = 12
     ) {
         self.text = text
         self._isFocused = isFocused
         self.placeholder = placeholder
         self.__isFocused = __isFocused
+        self.tint = tint
+        self.foreground = foreground
         self.background = background
         self.hPadding = hPadding
         self.vPadding = vPadding
@@ -151,13 +157,14 @@ public struct TextFieldView: View {
                         placeholder: placeholder,
                         size: OMTitle.size,
                         write: updateText)
-                .foregroundStyle(background)
+                .foregroundStyle(foreground ?? background)
+                .tint(tint ?? background)
                 .focused($__isFocused)
                 
             ButtonView(icon: "xmark.circle.fill", 
                        hPadding: 0,
                        vPadding: 0,
-                       tint: isFocused ? background.opacity(1) : .clear,
+                       tint: isFocused ? tint ?? background : .clear,
                        action: cancel)
         }
         .padding(.horizontal, hPadding)
