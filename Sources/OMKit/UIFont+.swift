@@ -10,7 +10,7 @@ import Foundation
 #if os(iOS)
 import UIKit
 @available(iOS 13.0, *)
-extension UIFont {
+public extension UIFont {
     
     var bold: UIFont { return withWeight(.bold) }
     var heavy: UIFont { return withWeight(.heavy) }
@@ -30,7 +30,7 @@ extension UIFont {
     
    
 
-    private func withWeight(_ weight: UIFont.Weight) -> UIFont {
+    public func withWeight(_ weight: UIFont.Weight) -> UIFont {
         var attributes = fontDescriptor.fontAttributes
         var traits = (attributes[.traits] as? [UIFontDescriptor.TraitKey: Any]) ?? [:]
 
@@ -45,7 +45,7 @@ extension UIFont {
         return UIFont(descriptor: descriptor, size: pointSize)
     }
     
-    private func withDesign(_ design: UIFontDescriptor.SystemDesign) -> UIFont {
+    public func withDesign(_ design: UIFontDescriptor.SystemDesign) -> UIFont {
         if let descriptor = fontDescriptor.withDesign(design) {
             return UIFont(descriptor: descriptor, size: pointSize)
         }

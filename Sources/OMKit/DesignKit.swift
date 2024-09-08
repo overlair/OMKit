@@ -150,7 +150,7 @@ public struct TextFieldView: View {
         HStack(spacing: 2) {
             Button(action: { __isFocused = true}) {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(background.opacity(0.5))
+                    .foregroundStyle((tint ?? background).opacity(0.5))
                     .font(Font.system(size: OMSubtitle.size, weight: .semibold))
             }
             OMTextField(text: text,
