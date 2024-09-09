@@ -347,3 +347,100 @@ public struct CircleButtonView<S: ShapeStyle>: View {
     }
 }
 
+
+import Defaults
+
+public enum OMColor: Int, _DefaultsSerializable {
+    
+    case primary
+    case veryDarkGray
+    case darkGray
+    case lightGray
+    case darkBrown
+    case lightBrown
+    case darkCream
+    case lightCream
+    case yellow
+    case orange
+    case pink
+    case red
+    case blue
+    case green
+    case purple
+    
+    public var color: Color {
+        Color(uiColor)
+    }
+    
+    public var uiColor: UIColor {
+        switch self {
+        case .primary: return UIColor.label
+        case .veryDarkGray: return UIColor(red: 71 / 255, green: 70 / 255, blue: 68 / 255, alpha: 1)
+        case .darkGray: return UIColor(red: 124 / 255, green: 125 / 255, blue: 128 / 255, alpha: 1)
+        case .lightGray: return UIColor(red: 170 / 255, green: 171 / 255, blue: 177 / 255, alpha: 1)
+            
+        case .darkBrown: return UIColor(red: 133 / 255, green: 96 / 255, blue: 80 / 255, alpha: 1)
+        case .lightBrown: return  UIColor(red: 193 / 255, green: 154 / 255, blue: 107 / 255, alpha: 1)
+            
+        case .darkCream: return  UIColor(red: 240 / 255, green: 210 / 255, blue: 150 / 255, alpha: 1)
+            
+        case .lightCream: return UIColor(red: 252 / 255, green: 229 / 255, blue: 192 / 255, alpha: 1)
+            
+            
+        case .yellow: return UIColor(Color.yellow)
+        case .orange: return UIColor(Color.orange)
+        case .pink: return UIColor(red: 255 / 255, green: 105 / 255, blue: 180 / 255, alpha: 1)
+        case .red: return UIColor(Color.red)
+        case .blue: return UIColor(Color.blue)
+        case .green: return UIColor(Color.green)
+        case .purple: return UIColor(Color.darkPurple)
+        }
+    }
+}
+
+struct ColorView: View {
+    let color: OMColor
+    
+    @Environment(\.colorScheme) var colorScheme
+    var  body: some View {
+        let color = Color(color.uiColor)
+        HStack {
+            color
+            color.opacity(colorScheme.isDark ? 0.24 : 0.12)
+            Image(systemName: "plus")
+                .foregroundStyle(color)
+                .font(Font.system(size: OMButton.size, weight: .semibold))
+            Image(systemName: "checkmark.circle")
+                .foregroundStyle(color)
+                .font(Font.system(size: OMButton.size, weight: .semibold))
+        }
+            .frame(height: 50)
+            
+    }
+}
+
+#Preview {
+    VStack {
+        ColorView(color: .primary)
+        
+        
+        ColorView(color: .veryDarkGray)
+        ColorView(color: .darkGray)
+        ColorView(color: .lightGray)
+        
+        ColorView(color: .darkBrown)
+        ColorView(color: .lightBrown)
+        ColorView(color: .darkCream)
+//        ColorView(color: .lightCream)
+        ColorView(color: .yellow)
+        ColorView(color: .orange)
+        ColorView(color: .pink)
+        ColorView(color: .red)
+        ColorView(color: .blue)
+        ColorView(color: .green)
+        ColorView(color: .purple)
+        
+        
+        
+    }
+}
