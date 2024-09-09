@@ -367,6 +367,9 @@ public enum OMColor: Int, _DefaultsSerializable {
     case green
     case purple
     
+    case teal
+    case turquoise
+    
     public var color: Color {
         Color(uiColor)
     }
@@ -391,6 +394,10 @@ public enum OMColor: Int, _DefaultsSerializable {
         case .blue: return UIColor(Color.blue)
         case .green: return UIColor(Color.green)
         case .purple: return UIColor(red: 185 / 255, green: 122 / 255, blue: 244 / 255, alpha: 1)
+            
+        case .teal: return UIColor(Color.teal)
+        case .turquoise: return UIColor(Color.mint)
+
         }
     }
 }
@@ -427,9 +434,10 @@ struct ColorView: View {
 
         ColorView(color: .darkBrown)
         ColorView(color: .lightBrown)
-        ColorView(color: .darkCream)
-        ColorView(color: .lightCream)
-
+        
+        ColorView(color: .turquoise)
+        ColorView(color: .teal)
+        
         ColorView(color: .yellow)
         ColorView(color: .orange)
         ColorView(color: .pink)
@@ -437,6 +445,7 @@ struct ColorView: View {
         ColorView(color: .blue)
         ColorView(color: .green)
         ColorView(color: .purple)
+        
         
         
         
