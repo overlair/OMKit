@@ -366,7 +366,8 @@ public enum OMColor: Int, _DefaultsSerializable {
     case red
     case blue
     case green
-    case purple
+    case lightPurple
+    case darkPurple
     
     public var color: Color {
         Color(uiColor)
@@ -382,8 +383,8 @@ public enum OMColor: Int, _DefaultsSerializable {
         case .darkBrown: return UIColor(red: 133 / 255, green: 96 / 255, blue: 80 / 255, alpha: 1)
         case .lightBrown: return  UIColor(red: 193 / 255, green: 154 / 255, blue: 107 / 255, alpha: 1)
             
-        case .darkCream: return  UIColor(red: 240 / 255, green: 210 / 255, blue: 150 / 255, alpha: 1)
-            
+        case .darkCream: return  UIColor(red: 195 / 255, green: 176 / 255, blue: 145 / 255, alpha: 1)
+
         case .lightCream: return UIColor(red: 252 / 255, green: 229 / 255, blue: 192 / 255, alpha: 1)
             
             
@@ -393,7 +394,8 @@ public enum OMColor: Int, _DefaultsSerializable {
         case .red: return UIColor(Color.red)
         case .blue: return UIColor(Color.blue)
         case .green: return UIColor(Color.green)
-        case .purple: return UIColor(Color.darkPurple)
+        case .lightPurple: return UIColor(red: 214 / 255, green: 180 / 255, blue: 252 / 255, alpha: 1)
+        case .darkPurple: return UIColor(Color.darkPurple)
         }
     }
 }
@@ -414,7 +416,7 @@ struct ColorView: View {
                 .foregroundStyle(color)
                 .font(Font.system(size: OMButton.size, weight: .semibold))
         }
-            .frame(height: 50)
+//            .frame(height: 50)
             
     }
 }
@@ -422,9 +424,7 @@ struct ColorView: View {
 #Preview {
     VStack {
         ColorView(color: .primary)
-        
-        
-        ColorView(color: .veryDarkGray)
+                
         ColorView(color: .darkGray)
         ColorView(color: .lightGray)
         
@@ -432,13 +432,14 @@ struct ColorView: View {
         ColorView(color: .lightBrown)
         ColorView(color: .darkCream)
 //        ColorView(color: .lightCream)
+        ColorView(color: .lightPurple)
         ColorView(color: .yellow)
         ColorView(color: .orange)
         ColorView(color: .pink)
         ColorView(color: .red)
         ColorView(color: .blue)
         ColorView(color: .green)
-        ColorView(color: .purple)
+        ColorView(color: .darkPurple)
         
         
         
