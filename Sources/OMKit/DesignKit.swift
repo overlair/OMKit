@@ -428,8 +428,7 @@ struct ColorView: View {
         ColorView(color: .darkBrown)
         ColorView(color: .lightBrown)
         ColorView(color: .darkCream)
-        
-        ColorView(color: .teal)
+        ColorView(color: .lightCream)
 
         ColorView(color: .yellow)
         ColorView(color: .orange)
