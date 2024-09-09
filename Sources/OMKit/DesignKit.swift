@@ -353,7 +353,6 @@ import Defaults
 public enum OMColor: Int, _DefaultsSerializable {
     
     case primary
-    case veryDarkGray
     case darkGray
     case lightGray
     case darkBrown
@@ -366,8 +365,7 @@ public enum OMColor: Int, _DefaultsSerializable {
     case red
     case blue
     case green
-    case lightPurple
-    case darkPurple
+    case purple
     
     public var color: Color {
         Color(uiColor)
@@ -376,7 +374,6 @@ public enum OMColor: Int, _DefaultsSerializable {
     public var uiColor: UIColor {
         switch self {
         case .primary: return UIColor.label
-        case .veryDarkGray: return UIColor(red: 71 / 255, green: 70 / 255, blue: 68 / 255, alpha: 1)
         case .darkGray: return UIColor(red: 124 / 255, green: 125 / 255, blue: 128 / 255, alpha: 1)
         case .lightGray: return UIColor(red: 170 / 255, green: 171 / 255, blue: 177 / 255, alpha: 1)
             
@@ -385,20 +382,20 @@ public enum OMColor: Int, _DefaultsSerializable {
             
         case .darkCream: return  UIColor(red: 195 / 255, green: 176 / 255, blue: 145 / 255, alpha: 1)
 
-        case .lightCream: return UIColor(red: 252 / 255, green: 229 / 255, blue: 192 / 255, alpha: 1)
-            
-            
+        case .lightCream: return  UIColor(red: 240 / 255, green: 214 / 255, blue: 150 / 255, alpha: 1)
+
         case .yellow: return UIColor(Color.yellow)
         case .orange: return UIColor(Color.orange)
         case .pink: return UIColor(red: 255 / 255, green: 105 / 255, blue: 180 / 255, alpha: 1)
         case .red: return UIColor(Color.red)
         case .blue: return UIColor(Color.blue)
         case .green: return UIColor(Color.green)
-        case .lightPurple: return UIColor(red: 214 / 255, green: 180 / 255, blue: 252 / 255, alpha: 1)
-        case .darkPurple: return UIColor(Color.darkPurple)
+        case .purple: return UIColor(red: 185 / 255, green: 122 / 255, blue: 244 / 255, alpha: 1)
         }
     }
 }
+
+//        case .muskDusk: return  UIColor(red: 207 / 255, green: 191 / 255, blue: 185 / 255, alpha: 1)
 
 struct ColorView: View {
     let color: OMColor
@@ -424,22 +421,23 @@ struct ColorView: View {
 #Preview {
     VStack {
         ColorView(color: .primary)
-                
+        
         ColorView(color: .darkGray)
         ColorView(color: .lightGray)
-        
+
         ColorView(color: .darkBrown)
         ColorView(color: .lightBrown)
         ColorView(color: .darkCream)
-//        ColorView(color: .lightCream)
-        ColorView(color: .lightPurple)
+        
+        ColorView(color: .teal)
+
         ColorView(color: .yellow)
         ColorView(color: .orange)
         ColorView(color: .pink)
         ColorView(color: .red)
         ColorView(color: .blue)
         ColorView(color: .green)
-        ColorView(color: .darkPurple)
+        ColorView(color: .purple)
         
         
         
