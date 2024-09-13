@@ -309,7 +309,7 @@ public struct MenuRepresentable: UIViewRepresentable {
     
     public func updateUIView(_ uiView: UIViewType, context: Context) {
         print("MENU TRYINGN TO UPDATE")
-        if let uiView = uiView as? UIButton, uiView.menu != menu {
+        if let uiView = uiView as? UIButton {
             uiView.menu = menu
             print("MENU UPDATING")
         }
