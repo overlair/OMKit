@@ -18,7 +18,7 @@ public enum OMDefault {
     public static let darkSecondaryColor =  UIColor(red: 108 / 255, green: 109 / 255, blue: 110 / 255, alpha: 1)
     public static let lightSecondaryColor = UIColor(red: 170 / 255, green: 169 / 255, blue: 166 / 255, alpha: 1)
     public static let secondaryColor = UIColor(dynamicProvider: { traits in
-        traits.userInterfaceStyle == .light ? OMDefault.darkSecondaryColor : OMDefault.lightSecondaryColor
+        traits.userInterfaceStyle == .light ? OMDefault.lightSecondaryColor : OMDefault.darkSecondaryColor
     })
 }
 
