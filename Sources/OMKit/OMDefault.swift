@@ -16,7 +16,7 @@ public enum OMDefault {
     })
     
     public static let darkSecondaryColor =  UIColor(red: 108 / 255, green: 109 / 255, blue: 110 / 255, alpha: 1)
-    public static let lightSecondaryColor = UIColor(red: 170 / 255, green: 169 / 255, blue: 166 / 255, alpha: 1)
+    public static let lightSecondaryColor = UIColor(red: 160 / 255, green: 159 / 255, blue: 159 / 255, alpha: 1)
     public static let secondaryColor = UIColor(dynamicProvider: { traits in
         traits.userInterfaceStyle == .light ? OMDefault.lightSecondaryColor : OMDefault.darkSecondaryColor
     })
@@ -28,7 +28,10 @@ public enum OMDefault {
         Color(OMDefault.darkSecondaryColor)
         Color(OMDefault.lightSecondaryColor)
         Color(OMDefault.lightPrimaryColor)
+        Image(systemName: "gearshape.fill")
+            .font(Font.system(size: 50))
+            .foregroundStyle(Color(OMDefault.lightSecondaryColor))
     }
     .padding()
-    .background(.black)
+    .background(.white)
 }
