@@ -122,6 +122,53 @@ public extension ASCollectionNode {
     }
 }
 
+public extension ASTableNode {
+    func reload<T: Collection>(changeset stagedChangeset: StagedChangeset<T>,
+                               setData: @escaping (T) -> (),
+                               animation: UITableView.RowAnimation) {
+        for changeset in stagedChangeset {
+            performBatchUpdates({
+                setData(changeset.data)
+                
+                if !changeset.sectionDeleted.isEmpty {
+                    deleteSections(IndexSet(changeset.sectionDeleted), with: animation)
+                }
+                
+                if !changeset.sectionInserted.isEmpty {
+                    insertSections(IndexSet(changeset.sectionInserted), with: animation)
+                }
+                
+                if !changeset.sectionUpdated.isEmpty {
+                    reloadSections(IndexSet(changeset.sectionUpdated), with: animation)
+                }
+                
+                for (source, target) in changeset.sectionMoved {
+                    moveSection(source, toSection: target)
+                }
+                
+                if !changeset.elementDeleted.isEmpty {
+                    deleteRows(at: changeset.elementDeleted.map { IndexPath(item: $0.element, section: $0.section) }, with: animation)
+                }
+                
+                if !changeset.elementInserted.isEmpty {
+                    insertRows(at: changeset.elementInserted.map { IndexPath(item: $0.element, section: $0.section) }, with: animation)
+                }
+                
+                if !changeset.elementUpdated.isEmpty {
+                    reloadRows(at: changeset.elementUpdated.map { IndexPath(item: $0.element, section: $0.section) }, with: animation)
+                }
+                
+                for (source, target) in changeset.elementMoved {
+                    moveRow(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
+                }
+            })
+        }
+            
+    }
+}
+
+
+
 
 
 
