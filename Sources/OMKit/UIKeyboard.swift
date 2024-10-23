@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol UIKeyboardDelegate {
+public protocol UIKeyboardDelegate {
     func inputKeyboard(didChangeHeight height: CGFloat)
 }
 
-class UIKeyboardObserver: NSObject {
+public class UIKeyboardObserver: NSObject {
     
-    init(delegate: UIKeyboardDelegate) {
+    public  init(delegate: UIKeyboardDelegate) {
         self.delegate = delegate
         super.init()
         
