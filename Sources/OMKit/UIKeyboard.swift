@@ -24,7 +24,7 @@ public class UIKeyboardObserver: NSObject {
     
     private(set) var isShowing: Bool = false
     
-    var keyboardHeight: CGFloat { keyboardRect.height }
+    public var keyboardHeight: CGFloat { keyboardRect.height }
     
     private(set) var keyboardRect: CGRect = .zero {
         didSet {
